@@ -1,0 +1,1432 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration des serveurs de production &mdash; Documentation Zeste de Savoir dev</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Installation de Elasticsearch (pour la recherche)" href="extra-install-es.html" />
+    <link rel="prev" title="Installation sous Windows" href="install-windows.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Zeste de Savoir
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install-linux.html">Installation sous Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-osx.html">Installation sous macOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-windows.html">Installation sous Windows</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration des serveurs de production</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parametres">Paramètres</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parametres-generaux">Paramètres généraux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parametres-specifiques">Paramètres spécifiques</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#premier-deploiement">Premier déploiement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#utilisateur-local">Utilisateur local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-des-outils">Installation des outils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clone-du-repo-et-configuration-de-prod">Clone du repo et configuration de prod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installation-de-l-application-de-base">Installation de l’application de base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outils-specifiques-a-un-serveur-de-run">Outils spécifiques à un serveur de run</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mise-a-jour-d-une-instance-existante">Mise à jour d’une instance existante</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-es.html">Installation de Elasticsearch (pour la recherche)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-frontend.html">Installation du frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-latex.html">Installation de LaTeX et de la <em>template</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-zmd.html">Installation et utilisation de zmarkdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contribuer à Zeste de Savoir</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html"><em>Workflow</em> et détails pratiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back-end.html">Le <em>back-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back-end-code.html">Documentation technique du <em>back-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front-end.html">Le <em>front-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Makefile et autres outils</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeste de Savoir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../install.html">Installation</a> &raquo;</li>
+        
+      <li>Configuration des serveurs de production</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/install/extra-deploy-in-production.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration-des-serveurs-de-production">
+<h1>Configuration des serveurs de production<a class="headerlink" href="#configuration-des-serveurs-de-production" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Zeste de Savoir est installé en 1 tiers (sur un seul serveur donc).</p>
+<div class="section" id="parametres">
+<h2>Paramètres<a class="headerlink" href="#parametres" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="parametres-generaux">
+<h3>Paramètres généraux<a class="headerlink" href="#parametres-generaux" title="Lien permanent vers ce titre">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Paramètre</th>
+<th class="head">Valeur</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>OS</td>
+<td>Linux, Debian 8 «&nbsp;Jessie&nbsp;»</td>
+</tr>
+<tr class="row-odd"><td>Serveurs web</td>
+<td>Nginx</td>
+</tr>
+<tr class="row-even"><td>Moteur WSGI</td>
+<td>Gunicorn</td>
+</tr>
+<tr class="row-odd"><td>SGBD</td>
+<td>MySQL</td>
+</tr>
+<tr class="row-even"><td>Contrôle des process</td>
+<td>systemd</td>
+</tr>
+<tr class="row-odd"><td>Surveillance</td>
+<td>Munin</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="parametres-specifiques">
+<h3>Paramètres spécifiques<a class="headerlink" href="#parametres-specifiques" title="Lien permanent vers ce titre">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="39%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">Préproduction</th>
+<th class="head">Production</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Nom</td>
+<td>beta.zestedesavoir.com</td>
+<td>zestedesavoir.com</td>
+</tr>
+<tr class="row-odd"><td>IPv4</td>
+<td><code class="docutils literal notranslate"><span class="pre">176.31.187.88</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">92.243.26.160</span></code></td>
+</tr>
+<tr class="row-even"><td>IPv6</td>
+<td>x</td>
+<td>Pas encore disponible…</td>
+</tr>
+<tr class="row-odd"><td>Identifiant</td>
+<td><em>Demande privée</em></td>
+<td><em>Demande privée</em></td>
+</tr>
+<tr class="row-even"><td>Mot de passe</td>
+<td><em>Demande privée</em></td>
+<td><em>Demande privée</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="premier-deploiement">
+<h2>Premier déploiement<a class="headerlink" href="#premier-deploiement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Toute la procédure suppose un déploiement dans <code class="docutils literal notranslate"><span class="pre">/opt/zds</span></code>.</p>
+<div class="section" id="utilisateur-local">
+<h3>Utilisateur local<a class="headerlink" href="#utilisateur-local" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Zeste de Savoir tourne sous l’utilisateur <strong>zds</strong> et le groupe <strong>root</strong>.</p>
+</div>
+<div class="section" id="installation-des-outils">
+<h3>Installation des outils<a class="headerlink" href="#installation-des-outils" title="Lien permanent vers ce titre">¶</a></h3>
+<ul class="simple">
+<li>python</li>
+<li>virtualenv (dans /opt/zds/zdsenv/)</li>
+<li>git</li>
+</ul>
+</div>
+<div class="section" id="clone-du-repo-et-configuration-de-prod">
+<h3>Clone du repo et configuration de prod<a class="headerlink" href="#clone-du-repo-et-configuration-de-prod" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span> <span class="o">&amp;&amp;</span> <span class="n">mkdir</span> <span class="n">zds</span> <span class="o">&amp;&amp;</span> <span class="n">chown</span> <span class="n">zds</span><span class="p">:</span><span class="n">zds</span> <span class="o">-</span><span class="n">R</span> <span class="n">zds</span>
+<span class="n">su</span> <span class="n">zds</span>
+
+<span class="n">cd</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">zds</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">data</span><span class="o">/</span><span class="n">tutoriels</span><span class="o">-</span><span class="n">private</span> <span class="n">data</span><span class="o">/</span><span class="n">tutoriels</span><span class="o">-</span><span class="n">private</span> <span class="n">data</span><span class="o">/</span><span class="n">tutoriels</span><span class="o">-</span><span class="n">public</span> <span class="n">data</span><span class="o">/</span><span class="n">articles</span><span class="o">-</span><span class="n">data</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zestedesavoir</span><span class="o">/</span><span class="n">zds</span><span class="o">-</span><span class="n">site</span><span class="o">.</span><span class="n">git</span>
+
+<span class="n">cd</span> <span class="n">zds</span><span class="o">-</span><span class="n">site</span>
+<span class="n">make</span> <span class="n">install</span><span class="o">-</span><span class="n">debian</span>
+
+<span class="n">cd</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">zds</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">virtualenv</span> <span class="c1"># Ajout du module virtualenv</span>
+<span class="n">virtualenv</span> <span class="n">zdsenv</span> <span class="o">--</span><span class="n">python</span><span class="o">=</span><span class="n">python2</span> <span class="c1"># Création du répertoire &quot;zdsenv&quot;</span>
+
+<span class="n">cd</span> <span class="n">zds</span><span class="o">-</span><span class="n">site</span>
+<span class="n">vim</span> <span class="n">zds</span><span class="o">/</span><span class="n">settings_prod</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Dans <code class="docutils literal notranslate"><span class="pre">settings_prod.py</span></code>, remplacez toutes les valeurs <code class="docutils literal notranslate"><span class="pre">to-fill</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/7074c5ee2722de648a39554931e8267a/settings_prod.py"><code class="xref download docutils literal notranslate"><span class="pre">configs/settings_prod.py</span></code></a></span><a class="headerlink" href="#id1" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding: utf-8</span>
+
+<span class="c1"># Zeste de Savoir settings file for production</span>
+<span class="c1"># WARNING: this file MUST be secret !!</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">raven</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">zds.utils.context_processor</span> <span class="kn">import</span> <span class="n">get_git_version</span>
+
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">ABSOLUTE_URL_OVERRIDES</span><span class="p">,</span> <span class="n">AUTHENTICATION_BACKENDS</span><span class="p">,</span> <span class="n">BASE_DIR</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">CORS_ALLOW_HEADERS</span><span class="p">,</span> <span class="n">CORS_ALLOW_METHODS</span><span class="p">,</span> <span class="n">CORS_EXPOSE_HEADERS</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">CORS_ORIGIN_ALLOW_ALL</span><span class="p">,</span> <span class="n">CRISPY_TEMPLATE_PACK</span><span class="p">,</span> <span class="n">FILE_UPLOAD_HANDLERS</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">GEOIP_PATH</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">INSTALLED_APPS</span><span class="p">,</span> <span class="n">LANGUAGES</span><span class="p">,</span> <span class="n">LANGUAGE_CODE</span><span class="p">,</span> <span class="n">LOCALE_PATHS</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">LOGIN_REDIRECT_URL</span><span class="p">,</span> <span class="n">LOGIN_URL</span><span class="p">,</span> <span class="n">MEDIA_URL</span><span class="p">,</span> <span class="n">MESSAGE_TAGS</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">MIDDLEWARE_CLASSES</span><span class="p">,</span> <span class="n">OAUTH2_PROVIDER</span><span class="p">,</span> <span class="n">REST_FRAMEWORK</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">REST_FRAMEWORK_EXTENSIONS</span><span class="p">,</span> <span class="n">ROOT_URLCONF</span><span class="p">,</span> <span class="n">SERVE</span><span class="p">,</span> <span class="n">SITE_ID</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">STATICFILES_DIRS</span><span class="p">,</span> <span class="n">STATICFILES_FINDERS</span><span class="p">,</span> <span class="n">STATIC_URL</span><span class="p">,</span> <span class="n">SWAGGER_SETTINGS</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">THUMBNAIL_ALIASES</span><span class="p">,</span> <span class="n">THUMBNAIL_PRESERVE_EXTENSIONS</span><span class="p">,</span> <span class="n">THUMBNAIL_QUALITY</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">TIME_ZONE</span><span class="p">,</span> <span class="n">USE_I18N</span><span class="p">,</span> <span class="n">USE_TZ</span><span class="p">,</span> <span class="n">WSGI_APPLICATION</span><span class="p">,</span> <span class="n">ZDS_APP</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">ES_ENABLED</span><span class="p">,</span> <span class="n">ES_CONNECTIONS</span><span class="p">,</span> <span class="n">ES_SEARCH_INDEX</span>
+
+<span class="c1">##### Django settings #####</span>
+
+<span class="c1"># NEVER set this True !!</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">USE_L10N</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.mysql&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;zdsdb&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;zds&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;to-fill&#39;</span><span class="p">,</span>  <span class="c1"># KEEP THIS SECRET !!</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;CONN_MAX_AGE&#39;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;charset&#39;</span><span class="p">:</span> <span class="s1">&#39;utf8mb4&#39;</span><span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># KEEP THIS SECRET !!</span>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">+=</span> <span class="p">(</span>
+    <span class="c1"># Sentry client (errors logs)</span>
+    <span class="s1">&#39;raven.contrib.django.raven_compat&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;zdsappserver&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gandi.zestedesavoir.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gandi.zestedesavoir.com.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;.zestedesavoir.com&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;.zestedesavoir.com.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.smtp.EmailBackend&#39;</span>
+<span class="n">EMAIL_USE_TLS</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span>
+<span class="n">EMAIL_PORT</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="c1">#EMAIL_HOST_USER = &#39;site@zestedesavoir.com&#39;</span>
+<span class="c1">#EMAIL_HOST_PASSWORD = &#39;to-fill&#39;</span>
+
+<span class="n">CACHES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.core.cache.backends.memcached.MemcachedCache&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;LOCATION&#39;</span><span class="p">:</span> <span class="s1">&#39;127.0.0.1:11211&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">SESSION_ENGINE</span> <span class="o">=</span> <span class="s2">&quot;django.contrib.sessions.backends.cached_db&quot;</span>
+<span class="n">SESSION_COOKIE_AGE</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">4</span>
+
+<span class="n">MEDIA_ROOT</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/data/media&#39;</span>
+
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/data/static&#39;</span>
+<span class="n">STATICFILES_STORAGE</span> <span class="o">=</span> <span class="s2">&quot;django.contrib.staticfiles.storage.CachedStaticFilesStorage&quot;</span>
+
+<span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;django.template.backends.django.DjangoTemplates&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DIRS&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s1">&#39;templates&#39;</span><span class="p">),</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;OPTIONS&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;loaders&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">(</span><span class="s1">&#39;django.template.loaders.cached.Loader&#39;</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="s1">&#39;django.template.loaders.filesystem.Loader&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;django.template.loaders.app_directories.Loader&#39;</span><span class="p">,</span>
+                <span class="p">]),</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;context_processors&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="c1"># Default context processors</span>
+                <span class="s1">&#39;django.contrib.auth.context_processors.auth&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.debug&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.i18n&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.media&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.static&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.request&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.template.context_processors.tz&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;django.contrib.messages.context_processors.messages&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;social.apps.django_app.context_processors.backends&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;social.apps.django_app.context_processors.login_redirect&#39;</span><span class="p">,</span>
+                <span class="c1"># ZDS context processors</span>
+                <span class="s1">&#39;zds.utils.context_processor.app_settings&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;zds.utils.context_processor.git_version&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;debug&#39;</span><span class="p">:</span> <span class="n">DEBUG</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Sentry (+ raven, the Python Client)</span>
+<span class="c1"># https://docs.getsentry.com/hosted/clients/python/integrations/django/</span>
+<span class="n">RAVEN_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;dsn&#39;</span><span class="p">:</span> <span class="s1">&#39;to-fill&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;release&#39;</span><span class="p">:</span> <span class="n">get_git_version</span><span class="p">()[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+   <span class="s1">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;[</span><span class="si">%(levelname)s</span><span class="s1">] -- </span><span class="si">%(asctime)s</span><span class="s1"> -- </span><span class="si">%(module)s</span><span class="s1"> : </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+       <span class="p">},</span>
+       <span class="s1">&#39;simple&#39;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;[</span><span class="si">%(levelname)s</span><span class="s1">] </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+       <span class="p">},</span>
+   <span class="p">},</span>
+   <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;django_log&#39;</span><span class="p">:{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;/var/log/zds/logging.django.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;debug_log&#39;</span><span class="p">:{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;/var/log/zds/debug.django.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;generator_log&#39;</span><span class="p">:{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;/var/log/zds/generator.log&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;mail_admins&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.AdminEmailHandler&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+       <span class="s1">&#39;sentry&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>  <span class="c1"># For beta purpose it can be lowered to WARNING</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;raven.handlers.logging.SentryHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dsn&#39;</span><span class="p">:</span> <span class="s1">&#39;to-fill&#39;</span>
+        <span class="p">},</span>
+   <span class="p">},</span>
+   <span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;django&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;django_log&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;zds&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;django_log&#39;</span><span class="p">,</span> <span class="s1">&#39;sentry&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;django.request&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mail_admins&#39;</span><span class="p">,</span> <span class="s1">&#39;django_log&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;generator&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;generator_log&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># https://docs.djangoproject.com/en/stable/ref/settings/#secure-proxy-ssl-header</span>
+<span class="n">SECURE_PROXY_SSL_HEADER</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;HTTP_X_FORWARDED_PROTOCOL&#39;</span><span class="p">,</span> <span class="s1">&#39;https&#39;</span><span class="p">)</span>
+
+
+<span class="c1">##### Dependencies settings #####</span>
+
+
+<span class="c1"># easy-thumbnails</span>
+<span class="c1"># http://easy-thumbnails.readthedocs.io/en/2.1/ref/settings/</span>
+<span class="n">THUMBNAIL_OPTIMIZE_COMMAND</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;png&#39;</span><span class="p">:</span> <span class="s1">&#39;/usr/bin/optipng {filename}&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gif&#39;</span><span class="p">:</span> <span class="s1">&#39;/usr/bin/optipng {filename}&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;jpeg&#39;</span><span class="p">:</span> <span class="s1">&#39;/usr/bin/jpegoptim {filename}&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Pandoc settings</span>
+<span class="n">PANDOC_LOC</span> <span class="o">=</span> <span class="s1">&#39;/usr/local/bin/&#39;</span>
+<span class="n">PANDOC_LOG</span> <span class="o">=</span> <span class="s1">&#39;/var/log/zds/pandoc.log&#39;</span>
+<span class="n">PANDOC_LOG_STATE</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># fix for Gandi</span>
+<span class="n">PANDOC_PDF_PARAM</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;--latex-engine=xelatex &quot;</span>
+                    <span class="s2">&quot;--template={} -s -S -N &quot;</span>
+                    <span class="s2">&quot;--toc -V documentclass=scrbook -V lang=francais &quot;</span>
+                    <span class="s2">&quot;-V mainfont=Merriweather -V monofont=</span><span class="se">\&quot;</span><span class="s2">SourceCodePro-Regular</span><span class="se">\&quot;</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;-V fontsize=12pt -V geometry:margin=1in &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;/opt/zds/zds-site/assets/tex/template.tex&#39;</span><span class="p">))</span>
+
+<span class="c1"># python-social-auth</span>
+<span class="c1"># http://psa.matiasaguirre.net/docs/configuration/django.html</span>
+<span class="n">SOCIAL_AUTH_PIPELINE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;social.pipeline.social_auth.social_details&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.social_uid&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.auth_allowed&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.social_user&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.user.get_username&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.associate_by_email&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.user.create_user&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;zds.member.models.save_profile&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.associate_user&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.social_auth.load_extra_data&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;social.pipeline.user.user_details&#39;</span>
+<span class="p">)</span>
+<span class="c1"># KEEP THIS SECRET !!</span>
+<span class="n">SOCIAL_AUTH_ACEBOOK_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_ACEBOOK_SECRET</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_WITTER_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_WITTER_SECRET</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_OOGLE_OAUTH2_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_OOGLE_OAUTH2_SECRET</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">SOCIAL_AUTH_ANITIZE_REDIRECTS</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+
+<span class="c1"># Django reCAPTCHA</span>
+<span class="c1"># https://github.com/praekelt/django-recaptcha</span>
+<span class="n">USE_CAPTCHA</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">NOCAPTCHA</span> <span class="o">=</span> <span class="bp">True</span>   <span class="c1"># Use the &quot;No Captcha engine&quot;</span>
+<span class="n">RECAPTCHA_USE_SSL</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1"># KEEP THIS SECRET !!</span>
+<span class="n">RECAPTCHA_UBLIC_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">RECAPTCHA_RIVATE_KEY</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+
+
+<span class="c1">##### ZdS settings #####</span>
+
+<span class="c1"># added in v20</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;secure_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;https://zestedesavoir.com&#39;</span>
+
+<span class="c1"># added in v21</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;display_search_bar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># forum</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;forum&#39;</span><span class="p">][</span><span class="s1">&#39;beta_forum_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">23</span>
+
+<span class="c1"># member</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;member&#39;</span><span class="p">][</span><span class="s1">&#39;anonymous_account&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;anonyme&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;member&#39;</span><span class="p">][</span><span class="s1">&#39;external_account&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Auteur externe&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;member&#39;</span><span class="p">][</span><span class="s1">&#39;bot_account&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Clem&#39;</span>
+
+<span class="c1"># site</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;https://zestedesavoir.com&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;association&#39;</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;communication@zestedesavoir.com&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;association&#39;</span><span class="p">][</span><span class="s1">&#39;fee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;(montant en attente de procédures administratives)&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;googleAnalyticsID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;site&#39;</span><span class="p">][</span><span class="s1">&#39;googleTagManagerID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;to-fill&#39;</span>
+
+<span class="c1"># content</span>
+<span class="c1">#ZDS_APP[&#39;content&#39;][&#39;build_pdf_when_published&#39;] = False</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;article&#39;</span><span class="p">][</span><span class="s1">&#39;repo_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/data/articles-data&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;repo_private_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/data/contents-private&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;repo_public_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/data/contents-public&#39;</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][</span><span class="s1">&#39;extra_content_generation_policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;WATCHDOG&#39;</span>
+
+<span class="c1"># enable ping!</span>
+<span class="n">ZDS_APP</span><span class="p">[</span><span class="s1">&#39;comment&#39;</span><span class="p">][</span><span class="s1">&#39;enable_pings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1"># Vote anonymisation - cf v18 : https://goo.gl/L6X4hw</span>
+<span class="n">VOTES_ID_LIMIT</span> <span class="o">=</span> <span class="mi">131319</span>
+
+<span class="c1"># tags in menu</span>
+<span class="n">TOP_TAG_MAX</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># path for old tutorials for Site du Z&amp;ro</span>
+<span class="n">SDZ_TUTO_DIR</span> <span class="o">=</span> <span class="s1">&#39;/home/zds/tutos_sdzv3/Sources_md&#39;</span>
+
+<span class="c1"># Force HTTPS for logged users</span>
+<span class="n">FORCE_HTTPS_FOR_MEMBERS</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">ENABLE_HTTPS_DECORATOR</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># visual changes</span>
+<span class="c1">#ZDS_APP[&#39;visual_changes&#39;] = [&#39;snow&#39;, &#39;clem-christmas&#39;]</span>
+<span class="c1">#ZDS_APP[&#39;visual_changes&#39;] = [&#39;clem-halloween&#39;]</span>
+
+<span class="n">ES_SEARCH_INDEX</span><span class="p">[</span><span class="s1">&#39;shards&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<p>Il est possible de personnaliser ZdS pour n’importe quel site communautaire de
+partage. Un ensemble de paramètres est disponible dans le fichier
+<code class="docutils literal notranslate"><span class="pre">settings.py</span></code> via le dictionnaire <code class="docutils literal notranslate"><span class="pre">ZDS_APP</span></code>. Vous pourrez donc écraser ces
+variables par défaut dans votre fichier <code class="docutils literal notranslate"><span class="pre">settings_prod.py</span></code>, comme illustré
+dans le fichier ci-dessus.</p>
+</div>
+<div class="section" id="installation-de-l-application-de-base">
+<h3>Installation de l’application de base<a class="headerlink" href="#installation-de-l-application-de-base" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Suivre <a class="reference external" href="linux-install.html">l’installation sous Linux</a> en tenant compte des subtilités suivantes :</p>
+<ul class="simple">
+<li>Installer <a class="reference external" href="frontend-install.html">les outils front</a> n’est pas nécessaire, le front étant packagé par Travis.</li>
+<li><a class="reference external" href="extra-install-es.html">Installez Elasticsearch</a> ;</li>
+<li><a class="reference external" href="extra-install-latex.html">Installez LaTeX</a>.</li>
+<li>Installer MySQL5.6 depuis backports: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">-t</span> <span class="pre">jessie-backports</span> <span class="pre">install</span> <span class="pre">mysql-server</span> <span class="pre">mysql-client</span> <span class="pre">libmysqlclient-dev</span></code></li>
+<li>Installer les dépendances de production avec <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">-r</span> <span class="pre">requirements-prod.txt</span></code></li>
+</ul>
+</div>
+<div class="section" id="outils-specifiques-a-un-serveur-de-run">
+<h3>Outils spécifiques à un serveur de run<a class="headerlink" href="#outils-specifiques-a-un-serveur-de-run" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="gunicorn">
+<h4>Gunicorn<a class="headerlink" href="#gunicorn" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/f81b3e79bdb921cf17805bed5b508a08/gunicorn_config.py"><code class="xref download docutils literal notranslate"><span class="pre">configs/gunicorn_config.py</span></code></a></span><a class="headerlink" href="#id2" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/zdsenv/bin/gunicorn&#39;</span>
+<span class="n">pythonpath</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/zds-site&#39;</span>
+<span class="n">bind</span> <span class="o">=</span> <span class="s1">&#39;unix:/opt/zds/zdsenv/bin/gunicorn.sock&#39;</span>
+<span class="n">workers</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;zds&#39;</span>
+<span class="n">group</span> <span class="o">=</span> <span class="s1">&#39;zds&#39;</span>
+<span class="n">errorlog</span> <span class="o">=</span> <span class="s1">&#39;/var/log/zds/gunicorn_error.log&#39;</span>
+<span class="n">loglevel</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="s1">&#39;/opt/zds/gunicorn.pid&#39;</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="nginx">
+<h4>Nginx<a class="headerlink" href="#nginx" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Installer nginx.</p>
+<p>Une version récente de nginx est nécessaire pour utiliser HTTP/2. Si la version installée est inférieure à la version 1.9.5 il faut la mettre à jour avec celle <a class="reference external" href="https://nginx.org/en/linux_packages.html#stable">des dépot nginx</a>. Toutefois, HTTP/2 n’est pas nécessaire au bon fonctionnement de Zeste de Savoir, pensez juste à adapter <code class="docutils literal notranslate"><span class="pre">sites-available/zestedesavoir</span></code>.</p>
+<p>La configuration nginx de Zeste de Savoir est séparée en plusieurs fichiers, en plus des quelques fichiers de configuration par défaut de nginx:</p>
+<div class="code text highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span>
+<span class="o">|-</span> <span class="n">nginx</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Fichier de configuration principal</span>
+<span class="o">|-</span> <span class="n">sites</span><span class="o">-</span><span class="n">available</span><span class="o">/</span>
+<span class="o">|</span>  <span class="o">|-</span> <span class="n">prod</span><span class="o">-</span><span class="n">redirect</span> <span class="c1"># Redirection de www.zestedesavoir.com -&gt; zestedesavoir.com en prod</span>
+<span class="o">|</span>  \<span class="o">-</span> <span class="n">zestedesavoir</span> <span class="c1"># Configuration propre au site</span>
+\<span class="o">-</span> <span class="n">snippets</span><span class="o">/</span> <span class="c1"># Dossier contenant des configurations incluses dans différents fichiers</span>
+   <span class="o">|-</span> <span class="n">antispam</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Incluse dans zestedesavoir</span>
+   <span class="o">|-</span> <span class="n">headers</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Headers type HSTS, CSP (et X-Robots-Tags sur la beta)</span>
+   <span class="o">|-</span> <span class="n">ssl</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Définition des protocoles SSL à utiliser + conf. des certificats</span>
+   <span class="o">|-</span> <span class="n">gzip</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Configuration pour la compression</span>
+   <span class="o">|-</span> <span class="n">proxy</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Headers à passer au proxy (gunicorn)</span>
+   \<span class="o">-</span> <span class="n">static</span><span class="o">-</span><span class="n">cache</span><span class="o">.</span><span class="n">conf</span> <span class="c1"># Headers à rajouter pour les contenus statiques (cache)</span>
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/92b5f18e2baba1fbba588783566b6104/nginx.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/nginx.conf</span></code></a></span><a class="headerlink" href="#id3" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">user</span> <span class="s">www-data</span><span class="p">;</span>
+<span class="k">worker_processes</span> <span class="s">auto</span><span class="p">;</span>
+<span class="k">pid</span> <span class="s">/run/nginx.pid</span><span class="p">;</span>
+
+<span class="k">events</span> <span class="p">{</span>
+	<span class="kn">worker_connections</span> <span class="mi">768</span><span class="p">;</span>
+	<span class="c1"># multi_accept on;</span>
+<span class="p">}</span>
+
+<span class="k">http</span> <span class="p">{</span>
+	<span class="c1">##</span>
+	<span class="c1"># Basic Settings</span>
+	<span class="c1">##</span>
+
+	<span class="kn">sendfile</span> <span class="no">on</span><span class="p">;</span>
+	<span class="kn">tcp_nopush</span> <span class="no">on</span><span class="p">;</span>
+	<span class="kn">tcp_nodelay</span> <span class="no">on</span><span class="p">;</span>
+	<span class="kn">keepalive_timeout</span> <span class="mi">65</span><span class="p">;</span>
+	<span class="kn">types_hash_max_size</span> <span class="mi">2048</span><span class="p">;</span>
+	<span class="c1"># server_tokens off;</span>
+
+	<span class="c1"># server_names_hash_bucket_size 64;</span>
+	<span class="c1"># server_name_in_redirect off;</span>
+
+	<span class="kn">include</span> <span class="s">mime.types</span><span class="p">;</span>
+	<span class="kn">default_type</span> <span class="s">application/octet-stream</span><span class="p">;</span>
+
+	<span class="c1">##</span>
+	<span class="c1"># Logging Settings</span>
+	<span class="c1">##</span>
+
+	<span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span><span class="p">;</span>
+	<span class="kn">error_log</span> <span class="s">/var/log/nginx/error.log</span><span class="p">;</span>
+
+	<span class="c1">##</span>
+	<span class="c1"># Virtual Host Configs</span>
+	<span class="c1">##</span>
+	<span class="kn">include</span> <span class="s">sites-enabled/*</span><span class="p">;</span>
+
+	<span class="kn">include</span> <span class="s">snippets/ssl.conf</span><span class="p">;</span>
+	<span class="kn">include</span> <span class="s">snippets/gzip.conf</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/e4a3fd3bf100d58bb508fd80dd6ee432/prod-redirect"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/sites-available/prod-redirect</span></code></a></span><a class="headerlink" href="#id4" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+	<span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+	<span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+	<span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+	<span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+	<span class="kn">server_name</span>
+		<span class="s">www.zestedesavoir.com</span>
+		<span class="s">ftp.zestedesavoir.com</span>
+		<span class="s">gandi.zestedesavoir.com</span>
+		<span class="s">postfix.zestedesavoir.com</span>
+		<span class="s">smtp.zestedesavoir.com</span>
+		<span class="s">uploads.zestedesavoir.com</span>
+	<span class="p">;</span>
+
+	<span class="kn">access_log</span> <span class="s">/var/log/zds/nginx-redirect-access.log</span><span class="p">;</span>
+	<span class="kn">error_log</span> <span class="s">/var/log/zds/nginx-redirect-error.log</span><span class="p">;</span>
+
+	<span class="kn">server_tokens</span> <span class="no">off</span><span class="p">;</span>
+	<span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/zestedesavoir.com/fullchain.pem</span><span class="p">;</span>
+	<span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/zestedesavoir.com/privkey.pem</span><span class="p">;</span>
+
+
+
+        <span class="kn">root</span> <span class="s">/var/www/html/</span><span class="p">;</span>
+
+        <span class="kn">location</span> <span class="p">~</span> <span class="sr">/.well-known</span> <span class="p">{</span>
+                <span class="kn">allow</span> <span class="s">all</span><span class="p">;</span>
+        <span class="p">}</span>
+	<span class="kn">rewrite</span> <span class="s">^(.*)</span> <span class="nv">$scheme://zestedesavoir.com$1</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/d71300d6520fa4fbd715f05d6b59fbf5/zestedesavoir"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/sites-available/zestedesavoir</span></code></a></span><a class="headerlink" href="#id5" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="k">upstream</span> <span class="s">zdsappserver</span> <span class="p">{</span>
+	<span class="kn">server</span> <span class="s">unix:/opt/zds/zdsenv/bin/gunicorn.sock</span> <span class="s">fail_timeout=0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Active le header X-Robots-Tag sur la beta pour éviter d&#39;indexer la beta</span>
+<span class="k">map</span> <span class="nv">$http_host</span> <span class="nv">$robots_tag_header</span> <span class="p">{</span>
+	<span class="kn">hostnames</span><span class="p">;</span>
+	<span class="kn">default</span> <span class="s">&#39;&#39;</span><span class="p">;</span>
+	<span class="kn">beta.zestedesavoir.com</span> <span class="s">&#39;none&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+	<span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+	<span class="kn">listen</span> <span class="s">[::]:80</span> <span class="s">default_server</span><span class="p">;</span>
+	<span class="kn">server_name</span> <span class="s">zestedesavoir.com</span><span class="p">;</span>
+	<span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+	<span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span> <span class="s">default_server</span><span class="p">;</span>
+	<span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span> <span class="s">default_server</span><span class="p">;</span>
+
+	<span class="kn">server_name</span> <span class="s">zestedesavoir.com</span><span class="p">;</span>
+
+	<span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">@proxy</span><span class="p">;</span>
+	<span class="kn">server_tokens</span> <span class="no">off</span><span class="p">;</span>
+	<span class="kn">client_max_body_size</span> <span class="s">100M</span><span class="p">;</span>
+
+	<span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/zestedesavoir.com/fullchain.pem</span><span class="p">;</span>
+	<span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/zestedesavoir.com/privkey.pem</span><span class="p">;</span>
+	<span class="kn">include</span> <span class="s">snippets/ssl.conf</span><span class="p">;</span>
+
+	<span class="c1"># Logging</span>
+	<span class="kn">access_log</span> <span class="s">/var/log/zds/nginx-access.log</span><span class="p">;</span>
+	<span class="kn">error_log</span> <span class="s">/var/log/zds/nginx-error.log</span><span class="p">;</span>
+
+	<span class="c1"># Rewrite de l&#39;ancienne page de teasing</span>
+	<span class="kn">rewrite</span> <span class="s">^/teasing/</span>$ <span class="s">/</span> <span class="s">permanent</span><span class="p">;</span>
+
+	<span class="kn">root</span> <span class="s">/opt/zds/zdsenv/webroot</span><span class="p">;</span>
+
+	<span class="kn">location</span> <span class="p">~</span> <span class="sr">/.well-known</span> <span class="p">{</span>
+		<span class="kn">allow</span> <span class="s">all</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kn">location</span> <span class="s">@proxy</span> <span class="p">{</span>
+		<span class="c1"># 503 si la maintenance est active</span>
+		<span class="kn">if</span> <span class="s">(-f</span> <span class="nv">$document_root/maintenance.html</span><span class="s">)</span> <span class="p">{</span>
+			<span class="kn">return</span> <span class="mi">503</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="c1"># Ajout d&#39;un trailing slash sur les URLs</span>
+		<span class="kn">if</span> <span class="s">(</span><span class="nv">$uri</span> <span class="s">!~</span> <span class="s">(\.|^/api))</span> <span class="p">{</span>
+			<span class="kn">rewrite</span> <span class="s">^(.*[^/])</span>$ <span class="nv">$1/</span> <span class="s">permanent</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="kn">include</span> <span class="s">snippets/proxy.conf</span><span class="p">;</span>
+		<span class="kn">proxy_pass</span> <span class="s">http://zdsappserver</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="kn">location</span> <span class="s">@maintenance</span> <span class="p">{</span>
+		<span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">/maintenance.html</span> <span class="s">break</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1"># Cache headers on static resources</span>
+	<span class="kn">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">^/(static|media|errors)/</span> <span class="p">{</span>
+		<span class="kn">include</span> <span class="s">snippets/static-cache.conf</span><span class="p">;</span>
+		<span class="kn">include</span> <span class="s">snippets/clem_smileys.conf</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1"># Error pages</span>
+	<span class="kn">error_page</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">504</span> <span class="s">/errors/500.html</span><span class="p">;</span>
+	<span class="kn">error_page</span> <span class="mi">503</span> <span class="s">@maintenance</span><span class="p">;</span>
+
+	<span class="kn">include</span> <span class="s">snippets/headers.conf</span><span class="p">;</span>
+	<span class="kn">include</span> <span class="s">snippets/antispam.conf</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/9c113d5d91beef62aeb162ca36f0e1bf/antispam.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/antispam.conf</span></code></a></span><a class="headerlink" href="#id6" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conf anti-exploit, source : https://www.howtoforge.com/nginx-how-to-block-exploits-sql-injections-file-injections-spam-user-agents-etc</span>
+<span class="c1">#</span>
+<span class="c1">## Block spam</span>
+<span class="k">set</span> <span class="nv">$block_spam</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$query_string</span> <span class="p">~</span> <span class="sr">&quot;\b(ultram|unicauca|valium|viagra|vicodin|xanax|ypxaieo)\b&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_spam</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$query_string</span> <span class="p">~</span> <span class="sr">&quot;\b(erections|hoodia|huronriveracres|impotence|levitra|libido)\b&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_spam</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$query_string</span> <span class="p">~</span> <span class="sr">&quot;\b(ambien|blue\spill|cialis|cocaine|ejaculation|erectile)\b&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_spam</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$query_string</span> <span class="p">~</span> <span class="sr">&quot;\b(lipitor|phentermin|pro[sz]ac|sandyauer|tramadol|troyhamby)\b&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_spam</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$block_spam</span> <span class="p">=</span> <span class="mi">1</span><span class="s">)</span> <span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">## Block user agents</span>
+<span class="k">set</span> <span class="nv">$block_user_agents</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1"># Don&#39;t disable wget if you need it to run cron jobs!</span>
+<span class="c1">#if ($http_user_agent ~ &quot;Wget&quot;) {</span>
+<span class="c1">#    set $block_user_agents 1;</span>
+<span class="c1">#}</span>
+
+<span class="c1"># Disable Akeeba Remote Control 2.5 and earlier</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;Indy</span> <span class="s">Library&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># Common bandwidth hoggers and hacking tools.</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;libwww-perl&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;GetRight&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;GetWeb!&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;Go!Zilla&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;Download</span> <span class="s">Demon&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;Go-Ahead-Got-It&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;TurnitinBot&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;GrabNet&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1"># SpaceFox: adds HTTrack</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;HTTrack&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block_user_agents</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$block_user_agents</span> <span class="p">=</span> <span class="mi">1</span><span class="s">)</span> <span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/721c3aabc12c97ec1ea58227803a5f1b/gzip.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/gzip.conf</span></code></a></span><a class="headerlink" href="#id7" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># GZIP compression</span>
+<span class="k">gzip</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">gzip_comp_level</span> <span class="mi">6</span><span class="p">;</span>
+<span class="k">gzip_types</span> <span class="s">text/plain</span> <span class="s">text/css</span> <span class="s">application/json</span> <span class="s">application/x-javascript</span> <span class="s">text/xml</span> <span class="s">application/xml</span> <span class="s">application/xml+rss</span> <span class="s">text/javascript</span> <span class="s">application/javascript</span><span class="p">;</span>
+<span class="k">gzip_proxied</span> <span class="s">any</span><span class="p">;</span>
+<span class="k">gzip_vary</span> <span class="no">on</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/35a4bc129bbe046b248ee8fb7f5cddfb/headers.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/headers.conf</span></code></a></span><a class="headerlink" href="#id8" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># CSP</span>
+<span class="c1"># NOTE: CSP is not ready yet, see https://github.com/zestedesavoir/zds-site/issues/3242</span>
+<span class="c1"># add_header Content-Security-Policy &quot;default-src &#39;self&#39;; script-src &#39;self&#39; &#39;unsafe-eval&#39; &#39;unsafe-inline&#39; https://www.gstatic.com https://www.google.com https://cdn.mathjax.org https://www.google-analytics.com https://www.googletagmanager.com; style-src &#39;self&#39; &#39;unsafe-inline&#39; https://fonts.googleapis.com; img-src * ; font-src &#39;self&#39; https://fonts.googleapis.com https://fonts.gstatic.com; connect-src &#39;self&#39; ; media-src &#39;none&#39; ; object-src &#39;none&#39; ; child-src https://www.google.com; upgrade-insecure-requests ;&quot;;</span>
+
+<span class="c1"># P3P</span>
+<span class="k">add_header</span> <span class="s">P3P</span> <span class="s">&#39;CP=&quot;ALL</span> <span class="s">DSP</span> <span class="s">COR</span> <span class="s">PSAa</span> <span class="s">PSDa</span> <span class="s">OUR</span> <span class="s">NOR</span> <span class="s">ONL</span> <span class="s">UNI</span> <span class="s">COM</span> <span class="s">NAV&quot;&#39;</span><span class="p">;</span>
+
+<span class="c1"># HSTS</span>
+<span class="c1"># This forces the browsers to use HTTPS</span>
+<span class="c1"># DO NOT use this on a subdomain without a valid certificate</span>
+<span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">max-age=15768000</span><span class="p">;</span>
+
+<span class="c1"># CORS</span>
+<span class="c1"># add_header Access-Control-Allow-Origin *;</span>
+
+<span class="k">add_header</span> <span class="s">X-Clacks-Overhead</span> <span class="s">&quot;GNU</span> <span class="s">Terry</span> <span class="s">Pratchett&quot;</span><span class="p">;</span>
+
+<span class="c1"># Robots</span>
+<span class="k">add_header</span> <span class="s">X-Robots-Tag</span> <span class="nv">$robots_tag_header</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/0ffbb7c0120fa18575040ddff4d3a36c/proxy.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/proxy.conf</span></code></a></span><a class="headerlink" href="#id9" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paramètres du proxy vers gunicorn</span>
+<span class="k">proxy_read_timeout</span> <span class="s">1000s</span><span class="p">;</span>
+<span class="k">proxy_connect_timeout</span> <span class="s">1000s</span><span class="p">;</span>
+<span class="k">proxy_redirect</span>     <span class="no">off</span><span class="p">;</span>
+<span class="k">proxy_set_header</span>   <span class="s">Host</span>              <span class="nv">$host</span><span class="p">;</span>
+<span class="k">proxy_set_header</span>   <span class="s">X-Real-IP</span>         <span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="k">proxy_set_header</span>   <span class="s">X-Forwarded-For</span>   <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="k">proxy_set_header</span>   <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+<span class="k">proxy_intercept_errors</span> <span class="no">on</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/22ac7fe1b4ea4303c9af8e0b176eb72b/ssl.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/ssl.conf</span></code></a></span><a class="headerlink" href="#id10" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># SSL configuration</span>
+<span class="k">ssl_session_timeout</span> <span class="s">1d</span><span class="p">;</span>
+<span class="k">ssl_ciphers</span> <span class="s">&quot;EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4&quot;</span><span class="p">;</span>
+<span class="k">ssl_protocols</span> <span class="s">TLSv1</span> <span class="s">TLSv1.1</span> <span class="s">TLSv1.2</span><span class="p">;</span>
+<span class="k">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="k">ssl_session_tickets</span> <span class="no">off</span><span class="p">;</span>
+<span class="k">ssl_stapling</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_stapling_verify</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_dhparam</span> <span class="s">/etc/ssl/dhparam.pem</span><span class="p">;</span>
+
+<span class="c1"># Hardening security settings</span>
+<span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&quot;max-age=63072000</span><span class="p">;</span> <span class="k">includeSubDomains</span><span class="p">;</span> <span class="k">preload&quot;</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Xss-Protection</span> <span class="s">&quot;1&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">&quot;nosniff&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">SAMEORIGIN</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/2fd1a8878cdadc6f6828abf9829998bb/static-cache.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/nginx/snippets/static-cache.conf</span></code></a></span><a class="headerlink" href="#id11" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-nginx notranslate"><div class="highlight"><pre><span></span><span class="c1"># Headers de cache pour les contenus statics</span>
+<span class="k">expires</span> <span class="s">1y</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">Pragma</span> <span class="s">public</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">Cache-Control</span> <span class="s">&quot;public,</span> <span class="s">must-revalidate,</span> <span class="s">proxy-revalidate&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="n">snippets/headers.conf</span>;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tls-let-s-encrypt">
+<h4>TLS : Let’s Encrypt<a class="headerlink" href="#tls-let-s-encrypt" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Le site est servi en https avec un certificat Let’s Encrypt install avec
+<a class="reference external" href="https://certbot.eff.org">certbot</a>.</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Installer <code class="docutils literal notranslate"><span class="pre">certbot</span></code>:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">certbot</span> <span class="pre">-t</span> <span class="pre">jessie-backports</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Générer le nécessaire:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">certbot</span> <span class="pre">certonly</span> <span class="pre">--webroot</span> <span class="pre">-w</span> <span class="pre">/opt/zds/zdsenv/webroot</span> <span class="pre">-d</span> <span class="pre">zestedesavoir.com</span> <span class="pre">-d</span> <span class="pre">www.zestedesavoir.com</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Mettre un cron pour régénérer les certificats, avec l’utilisateur root:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">23</span> <span class="pre">*/2</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">certbot</span> <span class="pre">renew</span> <span class="pre">--quiet</span> <span class="pre">--post-hook</span> <span class="pre">&quot;service</span> <span class="pre">nginx</span> <span class="pre">reload&quot;</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="solr">
+<h4>Solr<a class="headerlink" href="#solr" title="Lien permanent vers ce titre">¶</a></h4>
+<p><a class="reference external" href="install-solr.html">Voir la documentation de Solr</a>.</p>
+</div>
+<div class="section" id="mysql">
+<h4>MySQL<a class="headerlink" href="#mysql" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Zeste de Savoir nécessite MySQL 5.6. Voici la configuration de production :</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/dff42840ea18148c43d0f19c33829a82/my.cnf"><code class="xref download docutils literal notranslate"><span class="pre">configs/my.cnf</span></code></a></span><a class="headerlink" href="#id12" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># The MySQL database server configuration file.</span>
+<span class="c1">#</span>
+<span class="c1"># You can copy this to one of:</span>
+<span class="c1"># - &quot;/etc/mysql/my.cnf&quot; to set global options,</span>
+<span class="c1"># - &quot;~/.my.cnf&quot; to set user-specific options.</span>
+<span class="c1"># </span>
+<span class="c1"># One can use all long options that the program supports.</span>
+<span class="c1"># Run program with --help to get a list of available options and with</span>
+<span class="c1"># --print-defaults to see which it would actually understand and use.</span>
+<span class="c1">#</span>
+<span class="c1"># For explanations see</span>
+<span class="c1"># http://dev.mysql.com/doc/mysql/en/server-system-variables.html</span>
+
+<span class="c1">#</span>
+<span class="c1"># * IMPORTANT: Additional settings that can override those from this file!</span>
+<span class="c1">#   The files must end with &#39;.cnf&#39;, otherwise they&#39;ll be ignored.</span>
+<span class="c1">#</span>
+
+<span class="o">!</span><span class="n">includedir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">conf</span><span class="p">.</span><span class="n">d</span><span class="o">/</span>
+<span class="o">!</span><span class="n">includedir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">mysql</span><span class="p">.</span><span class="n">conf</span><span class="p">.</span><span class="n">d</span><span class="o">/</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/c8e8cb8b57f8ee8aa0adacb2100178cf/my.cnf"><code class="xref download docutils literal notranslate"><span class="pre">configs/conf.d/my.cnf</span></code></a></span><a class="headerlink" href="#id13" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># The MySQL database server configuration file.</span>
+<span class="c1">#</span>
+<span class="c1"># You can copy this to one of:</span>
+<span class="c1"># - &quot;/etc/mysql/my.cnf&quot; to set global options,</span>
+<span class="c1"># - &quot;~/.my.cnf&quot; to set user-specific options.</span>
+<span class="c1">#</span>
+<span class="c1"># One can use all long options that the program supports.</span>
+<span class="c1"># Run program with --help to get a list of available options and with</span>
+<span class="c1"># --print-defaults to see which it would actually understand and use.</span>
+<span class="c1">#</span>
+<span class="c1"># For explanations see</span>
+<span class="c1"># http://dev.mysql.com/doc/mysql/en/server-system-variables.html</span>
+
+<span class="c1"># This will be passed to all mysql clients</span>
+<span class="c1"># It has been reported that passwords should be enclosed with ticks/quotes</span>
+<span class="c1"># escpecially if they contain &quot;#&quot; chars...</span>
+<span class="c1"># Remember to edit /etc/mysql/debian.cnf when changing the socket location.</span>
+<span class="p">[</span><span class="n">client</span><span class="p">]</span>
+<span class="n">port</span>            <span class="o">=</span> <span class="mi">3306</span>
+<span class="n">socket</span>          <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">mysqld</span><span class="o">/</span><span class="n">mysqld</span><span class="p">.</span><span class="n">sock</span>
+<span class="k">default</span><span class="o">-</span><span class="k">character</span><span class="o">-</span><span class="kt">set</span> <span class="o">=</span> <span class="n">utf8mb4</span>
+
+<span class="c1"># Here is entries for some specific programs</span>
+<span class="c1"># The following values assume you have at least 32M ram</span>
+
+<span class="c1"># This was formally known as [safe_mysqld]. Both versions are currently parsed.</span>
+<span class="p">[</span><span class="n">mysqld_safe</span><span class="p">]</span>
+<span class="n">socket</span>          <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">mysqld</span><span class="o">/</span><span class="n">mysqld</span><span class="p">.</span><span class="n">sock</span>
+<span class="n">nice</span>            <span class="o">=</span> <span class="mi">0</span>
+
+<span class="p">[</span><span class="n">mysqld</span><span class="p">]</span>
+<span class="c1">#</span>
+<span class="c1"># * Basic Settings</span>
+<span class="c1">#</span>
+<span class="n">user</span>            <span class="o">=</span> <span class="n">mysql</span>
+<span class="n">pid</span><span class="o">-</span><span class="n">file</span>        <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">mysqld</span><span class="o">/</span><span class="n">mysqld</span><span class="p">.</span><span class="n">pid</span>
+<span class="n">socket</span>          <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">mysqld</span><span class="o">/</span><span class="n">mysqld</span><span class="p">.</span><span class="n">sock</span>
+<span class="n">port</span>            <span class="o">=</span> <span class="mi">3306</span>
+<span class="n">basedir</span>         <span class="o">=</span> <span class="o">/</span><span class="n">usr</span>
+<span class="n">datadir</span>         <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<span class="n">tmpdir</span>          <span class="o">=</span> <span class="o">/</span><span class="n">tmp</span>
+<span class="n">lc</span><span class="o">-</span><span class="n">messages</span><span class="o">-</span><span class="n">dir</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">mysql</span>
+<span class="n">skip</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">locking</span>
+<span class="n">skip</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="n">resolve</span>
+<span class="c1">#</span>
+<span class="c1"># Instead of skip-networking the default is now to listen only on</span>
+<span class="c1"># localhost which is more compatible and is not less secure.</span>
+<span class="n">bind</span><span class="o">-</span><span class="n">address</span>            <span class="o">=</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<span class="c1">#</span>
+<span class="c1"># * Fine Tuning</span>
+<span class="c1">#</span>
+<span class="n">key_buffer</span>              <span class="o">=</span> <span class="mi">16</span><span class="n">M</span>
+<span class="n">max_allowed_packet</span>      <span class="o">=</span> <span class="mi">16</span><span class="n">M</span>
+<span class="n">thread_stack</span>            <span class="o">=</span> <span class="mi">256</span><span class="n">K</span>
+<span class="n">thread_cache_size</span>       <span class="o">=</span> <span class="mi">8</span>
+<span class="c1"># This replaces the startup script and checks MyISAM tables if needed</span>
+<span class="c1"># the first time they are touched</span>
+<span class="n">myisam</span><span class="o">-</span><span class="n">recover</span>         <span class="o">=</span> <span class="n">BACKUP</span>
+<span class="n">max_connections</span>        <span class="o">=</span> <span class="mi">60</span>
+<span class="c1">#table_cache            = 64</span>
+<span class="c1">#thread_concurrency     = 10</span>
+<span class="c1">#</span>
+<span class="c1"># * Query Cache Configuration</span>
+<span class="c1">#</span>
+<span class="c1"># query_cache_limit       = 1M</span>
+
+<span class="n">query_cache_size</span> <span class="o">=</span> <span class="mi">256</span><span class="n">M</span>
+<span class="n">query_cache_type</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">query_cache_limit</span> <span class="o">=</span> <span class="mi">512</span><span class="n">K</span>
+<span class="n">query_cache_min_res_unit</span> <span class="o">=</span> <span class="mi">512</span>
+
+<span class="c1">#</span>
+<span class="c1"># * Logging and Replication</span>
+<span class="c1">#</span>
+<span class="c1"># Both location gets rotated by the cronjob.</span>
+<span class="c1"># Be aware that this log type is a performance killer.</span>
+<span class="c1"># As of 5.1 you can enable the log at runtime!</span>
+<span class="c1">#general_log_file        = /var/log/mysql/mysql.log</span>
+<span class="c1">#general_log             = 1</span>
+<span class="c1">#</span>
+<span class="c1"># Error log - should be very few entries.</span>
+<span class="c1">#</span>
+<span class="n">log_error</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">error</span><span class="p">.</span><span class="n">log</span>
+<span class="c1">#</span>
+<span class="c1"># Here you can see queries with especially long duration</span>
+<span class="n">slow_query_log_file</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">mysql</span><span class="o">-</span><span class="n">slow</span><span class="p">.</span><span class="n">log</span>
+<span class="n">slow_query_log</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">long_query_time</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1">#log-queries-not-using-indexes</span>
+<span class="c1">#</span>
+<span class="c1"># The following can be used as easy to replay backup logs or for replication.</span>
+<span class="c1"># note: if you are setting up a replication slave, see README.Debian about</span>
+<span class="c1">#       other settings you may need to change.</span>
+<span class="c1">#server-id              = 1</span>
+<span class="c1">#log_bin                        = /var/log/mysql/mysql-bin.log</span>
+<span class="n">expire_logs_days</span>        <span class="o">=</span> <span class="mi">10</span>
+<span class="n">max_binlog_size</span>         <span class="o">=</span> <span class="mi">100</span><span class="n">M</span>
+<span class="c1">#binlog_do_db           = include_database_name</span>
+<span class="c1">#binlog_ignore_db       = include_database_name</span>
+<span class="c1">#</span>
+<span class="c1"># * InnoDB</span>
+<span class="c1">#</span>
+<span class="c1"># InnoDB is enabled by default with a 10MB datafile in /var/lib/mysql/.</span>
+<span class="c1"># Read the manual for more InnoDB related options. There are many!</span>
+<span class="c1">#</span>
+<span class="c1"># * Security Features</span>
+<span class="c1">#</span>
+<span class="c1"># Read the manual, too, if you want chroot!</span>
+<span class="c1"># chroot = /var/lib/mysql/</span>
+<span class="c1">#</span>
+<span class="c1"># For generating SSL certificates I recommend the OpenSSL GUI &quot;tinyca&quot;.</span>
+<span class="c1">#</span>
+<span class="c1"># ssl-ca=/etc/mysql/cacert.pem</span>
+<span class="c1"># ssl-cert=/etc/mysql/server-cert.pem</span>
+<span class="c1"># ssl-key=/etc/mysql/server-key.pem</span>
+<span class="n">innodb_file_per_table</span><span class="o">=</span><span class="k">on</span>
+<span class="n">innodb_file_format</span><span class="o">=</span><span class="n">barracuda</span>
+<span class="n">innodb_large_prefix</span><span class="o">=</span><span class="k">on</span>
+<span class="n">innodb_buffer_pool_size</span><span class="o">=</span><span class="mi">2</span><span class="n">G</span>
+<span class="n">innodb_buffer_pool_instances</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">tmp_table_size</span><span class="o">=</span><span class="mi">128</span><span class="n">M</span>
+<span class="n">max_heap_table_size</span><span class="o">=</span><span class="mi">128</span><span class="n">M</span>
+<span class="n">sort_buffer_size</span><span class="o">=</span><span class="mi">4</span><span class="n">M</span>
+<span class="n">join_buffer_size</span><span class="o">=</span><span class="mi">256</span><span class="n">K</span>
+<span class="k">character</span><span class="o">-</span><span class="kt">set</span><span class="o">-</span><span class="n">client</span><span class="o">-</span><span class="n">handshake</span> <span class="o">=</span> <span class="no">FALSE</span>
+<span class="k">character</span><span class="o">-</span><span class="kt">set</span><span class="o">-</span><span class="n">server</span> <span class="o">=</span> <span class="n">utf8mb4</span>
+<span class="n">collation</span><span class="o">-</span><span class="n">server</span> <span class="o">=</span> <span class="n">utf8mb4_unicode_ci</span>
+
+
+<span class="p">[</span><span class="n">mysqldump</span><span class="p">]</span>
+<span class="n">quick</span>
+<span class="n">quote</span><span class="o">-</span><span class="n">names</span>
+<span class="n">max_allowed_packet</span>      <span class="o">=</span> <span class="mi">16</span><span class="n">M</span>
+
+<span class="p">[</span><span class="n">mysql</span><span class="p">]</span>
+<span class="c1">#no-auto-rehash # faster start of mysql but no tab completition</span>
+
+<span class="p">[</span><span class="n">isamchk</span><span class="p">]</span>
+<span class="n">key_buffer_size</span>              <span class="o">=</span> <span class="mi">16</span><span class="n">M</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/1ad70986d0a123f95074f81506156de7/mysqldump.cnf"><code class="xref download docutils literal notranslate"><span class="pre">configs/conf.d/mysqldump.cnf</span></code></a></span><a class="headerlink" href="#id14" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mysqldump</span><span class="p">]</span>
+<span class="n">quick</span>
+<span class="n">quote</span><span class="o">-</span><span class="n">names</span>
+<span class="n">max_allowed_packet</span>	<span class="o">=</span> <span class="mi">16</span><span class="n">M</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/a7e46c99b99f942a9333744ec804dfa9/mysql.cnf"><code class="xref download docutils literal notranslate"><span class="pre">configs/conf.d/mysql.cnf</span></code></a></span><a class="headerlink" href="#id15" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mysql</span><span class="p">]</span>
+<span class="k">default</span><span class="o">-</span><span class="k">character</span><span class="o">-</span><span class="kt">set</span> <span class="o">=</span> <span class="n">utf8mb4</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/93e7cf6bf8596405eb788e839b22f36e/mysqld_safe_syslog.cnf"><code class="xref download docutils literal notranslate"><span class="pre">configs/conf.d/mysqld_safe_syslog.cnf</span></code></a></span><a class="headerlink" href="#id16" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mysqld_safe</span><span class="p">]</span>
+<span class="n">syslog</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="supervisor">
+<h4>Supervisor<a class="headerlink" href="#supervisor" title="Lien permanent vers ce titre">¶</a></h4>
+<p>Installer supervisor.</p>
+<p>Créer deux configurations :</p>
+<div class="section" id="configuration-zds">
+<h5>Configuration ZdS<a class="headerlink" href="#configuration-zds" title="Lien permanent vers ce titre">¶</a></h5>
+<p>Les confs dans <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/zds.service</span></code> et <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/zds.socket</span></code>
+permettent de lancer le serveur applicatif de Zeste de Savoir (Gunicorn) à l’aide
+de <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">zds.{service,socket}</span></code> et l’arrêter avec <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">zds.{service,socket}</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">zds.service</span></code> nécessite la création manuelle de <code class="docutils literal notranslate"><span class="pre">/run/gunicorn</span></code> appartenant à <code class="docutils literal notranslate"><span class="pre">zds</span></code> : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">mkdir</span> <span class="pre">/run/gunicorn</span> <span class="pre">&amp;&amp;</span> <span class="pre">sudo</span> <span class="pre">chown</span> <span class="pre">zds</span> <span class="pre">/run/gunicorn</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/a1f4146107a7f0680339b21aa1621865/zds.service"><code class="xref download docutils literal notranslate"><span class="pre">configs/zds.service</span></code></a></span><a class="headerlink" href="#id17" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Zeste de Savoir
+<span class="nv">Requires</span><span class="o">=</span>zds.socket
+<span class="nv">After</span><span class="o">=</span>network.target
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">PIDFile</span><span class="o">=</span>/run/gunicorn/pid
+<span class="nv">User</span><span class="o">=</span>zds
+<span class="nv">Group</span><span class="o">=</span>zds
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/opt/zds/zdsenv
+<span class="nv">ExecStart</span><span class="o">=</span>/opt/zds/zdsenv/bin/gunicorn --pid /run/gunicorn/pid -c /opt/zds/gunicorn_config.py zds.wsgi
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill -s HUP <span class="nv">$MAINPID</span>
+<span class="nv">ExecStop</span><span class="o">=</span>/bin/kill -s TERM <span class="nv">$MAINPID</span>
+<span class="nv">PrivateTmp</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/3fc06f32881630f5ede316e408281aa4/zds.socket"><code class="xref download docutils literal notranslate"><span class="pre">configs/zds.socket</span></code></a></span><a class="headerlink" href="#id18" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>ZdS Gunicorn socket
+
+<span class="o">[</span>Socket<span class="o">]</span>
+<span class="c1">#ListenStream=/run/gunicorn/socket</span>
+<span class="nv">ListenStream</span><span class="o">=</span>/opt/zds/zdsenv/bin/gunicorn.sock
+<span class="nv">ListenStream</span><span class="o">=</span><span class="m">0</span>.0.0.0:9000
+<span class="nv">ListenStream</span><span class="o">=[</span>::<span class="o">]</span>:8000
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>sockets.target
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-solr">
+<h5>Configuration Solr<a class="headerlink" href="#configuration-solr" title="Lien permanent vers ce titre">¶</a></h5>
+<p>La conf dans <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system/solr.service</span></code> permet de lancer Solr à l’aide
+de <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">solr</span></code> et l’arrêter avec <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">stop</span> <span class="pre">solr</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/55321db65f145b4af1b4aac3b0204583/solr.service"><code class="xref download docutils literal notranslate"><span class="pre">configs/solr.service</span></code></a></span><a class="headerlink" href="#id19" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>SolR ZdS
+<span class="nv">After</span><span class="o">=</span>syslog.target network.target remote-fs.target nss-lookup.target
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">PIDFile</span><span class="o">=</span>/run/solrzds/pid
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/opt/zds/solr-4.9.1/example/
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/java -jar start.jar
+<span class="nv">User</span><span class="o">=</span>zds
+<span class="nv">Group</span><span class="o">=</span>zds
+<span class="nv">ExecReload</span><span class="o">=</span>/bin/kill -s HUP <span class="nv">$MAINPID</span>
+<span class="nv">ExecStop</span><span class="o">=</span>/bin/kill -s QUIT <span class="nv">$MAINPID</span>
+<span class="nv">PrivateTmp</span><span class="o">=</span><span class="nb">true</span>
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="munin">
+<h4>Munin<a class="headerlink" href="#munin" title="Lien permanent vers ce titre">¶</a></h4>
+<div class="section" id="configuration-generale">
+<h5>Configuration générale<a class="headerlink" href="#configuration-generale" title="Lien permanent vers ce titre">¶</a></h5>
+<p>Installer le noeud Munin : <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">munin-node</span></code>.</p>
+<p>On obtient les suggestions de plugins à installer avec <code class="docutils literal notranslate"><span class="pre">munin-node-configure</span> <span class="pre">--suggest</span></code> et les commandes à lancer pour les activer via <code class="docutils literal notranslate"><span class="pre">munin-node-configure</span> <span class="pre">--shell</span></code>.</p>
+<p>Pour l’instant le serveur de graphe est fourni par SpaceFox et <a class="reference external" href="http://munin.kisai.info">est visible ici</a>. Seul SpaceFox peut mettre à jour cette configuration. Le serveur de graphe accède au serveur en SSH avec cette clé publique, placée dans le home de l’utilisateur munin (sous debian, l’utilisateur créé par le packet munin a son home dans <code class="docutils literal notranslate"><span class="pre">/var/lib/munin</span></code>, donc sa clé doit être dans <code class="docutils literal notranslate"><span class="pre">/var/lib/munin/.ssh/authorized_keys</span></code>) :</p>
+<div class="code text highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">rsa</span> <span class="n">AAAAB3NzaC1yc2EAAAADAQABAAABAQDBsfYaz5d4wtyTM0Xx1TjpJt0LuZ2Il9JZD2</span><span class="o">+</span><span class="n">s4hNQToNBaqT3aafG1SuHuQkqjvIQrI28NEkjALQIp4zD7BOeeW9QlAwE7uiebi3FcwLfaPFwq5qvnpyOSmbktCjHX24a14ozgDPY5diPkOsyMdEYz</span><span class="o">/</span><span class="n">KTybSvFvgUjzUSCLBQ2EWj0CBktY6cFC45pvVCsdd</span><span class="o">/</span><span class="n">ToDsEVbhixyNmlOMc</span><span class="o">+</span><span class="n">FB</span><span class="o">/</span><span class="n">oT8CC6ZoDezSXQGaO51</span><span class="o">/</span><span class="n">zLS8l4ieBIcB4tK3JdJI</span><span class="o">+</span><span class="n">fFv5FJsfgMK</span><span class="o">+</span><span class="n">DbNV4pikw9qEZJlASQCU69L</span><span class="o">+</span><span class="n">YR7MxTXNCqRyQ1Z4qxH4ZdPELmNOoMB8dHxxBX7TGP</span><span class="o">+</span><span class="n">Hvpm3AH</span> <span class="n">munin</span><span class="nd">@Yog</span><span class="o">-</span><span class="n">Sothoth</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-specifique-a-zds">
+<h5>Configuration spécifique à ZdS<a class="headerlink" href="#configuration-specifique-a-zds" title="Lien permanent vers ce titre">¶</a></h5>
+<p>Créer les liens vers le plugin Django-Munin :</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_active_sessions</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_active_users</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_db_performance</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_articles</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_mps</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_posts</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_sessions</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_topics</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_tutorials</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_users</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">django</span><span class="o">.</span><span class="n">py</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span><span class="n">zds_total_tribunes</span>
+</pre></div>
+</div>
+<p>Créer le fichier <code class="docutils literal notranslate"><span class="pre">/etc/munin/plugin-conf.d/zds.conf</span></code> et y ajouter la config des graphes
+propres à ZdS :</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text"><a class="reference download internal" download="" href="../_downloads/58696f9fc11c541b04234c2f9c2abb7f/zds.conf"><code class="xref download docutils literal notranslate"><span class="pre">configs/munin/zds.conf</span></code></a></span><a class="headerlink" href="#id20" title="Lien permanent vers ce code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">zds_db_performance</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">db_performance</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_users</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_users</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_active_users</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">active_users</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_sessions</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_sessions</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_active_sessions</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">active_sessions</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_topics</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_topics</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_posts</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_posts</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_mps</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_mps</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_tutorials</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_tutorials</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_articles</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_articles</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+<span class="p">[</span><span class="n">zds_total_tribunes</span><span class="p">]</span>
+<span class="n">env</span><span class="o">.</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">zestedesavoir</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">munin</span><span class="o">/</span><span class="n">total_opinions</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">graph_category</span> <span class="n">zds</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mise-a-jour-d-une-instance-existante">
+<h2>Mise à jour d’une instance existante<a class="headerlink" href="#mise-a-jour-d-une-instance-existante" title="Lien permanent vers ce titre">¶</a></h2>
+<p><a class="reference external" href="https://github.com/zestedesavoir/zds-site/blob/dev/scripts/update_and_deploy.sh">Allez jeter un coup d’oeil à notre script de déploiement</a> ! ;) (lequel appelle <a class="reference external" href="https://github.com/zestedesavoir/zds-site/blob/dev/scripts/deploy.sh">le véritable script de déploiement</a>).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extra-install-es.html" class="btn btn-neutral float-right" title="Installation de Elasticsearch (pour la recherche)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-windows.html" class="btn btn-neutral" title="Installation sous Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2019, Zeste de Savoir
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

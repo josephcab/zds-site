@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation sous Windows &mdash; Documentation Zeste de Savoir dev</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Configuration des serveurs de production" href="extra-deploy-in-production.html" />
+    <link rel="prev" title="Installation sous macOS" href="install-osx.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Zeste de Savoir
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../install.html">Installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install-linux.html">Installation sous Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-osx.html">Installation sous macOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation sous Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequis">Prérequis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#les-virtualenvs-et-pycharm">Les virtualenvs et pycharm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-des-outils-front-end-et-de-zmarkdown">Installation des outils front-end et de zmarkdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#suite-et-fin-de-l-installation">Suite et fin de l’installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aller-plus-loin">Aller plus loin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="extra-deploy-in-production.html">Configuration des serveurs de production</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-es.html">Installation de Elasticsearch (pour la recherche)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-frontend.html">Installation du frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-install-latex.html">Installation de LaTeX et de la <em>template</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="extra-zmd.html">Installation et utilisation de zmarkdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contribuer à Zeste de Savoir</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html"><em>Workflow</em> et détails pratiques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back-end.html">Le <em>back-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../back-end-code.html">Documentation technique du <em>back-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../front-end.html">Le <em>front-end</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">Makefile et autres outils</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Zeste de Savoir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../install.html">Installation</a> &raquo;</li>
+        
+      <li>Installation sous Windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/install/install-windows.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-sous-windows">
+<h1>Installation sous Windows<a class="headerlink" href="#installation-sous-windows" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Cette partie de la documentation n’est probablement pas à jour faute de contributeur utilisant Windows. Il se peut que l’installation et les tests unitaires fonctionnent correctement, partiellement ou pas du tout. Bref, en cas de problème n’hésitez pas à venir demander de l’aide sur le <a class="reference external" href="https://zestedesavoir.com/forums/communaute/dev-zone/">forum des Devs” de Zeste de Savoir</a> !
+Notons que le support des SVG est désactivé sur windows.</p>
+</div>
+<p>Pour installer une version locale de ZdS sur Windows, veuillez suivre les instructions suivantes.
+Si une commande ne passe pas, essayez de savoir pourquoi avant de continuer.</p>
+<p>Il est conseillé de lancer à chaque fois PowerShell en administrateur pour les étapes suivantes et choisissez un répertoire pour le zds par exemple :</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd C:\dev\zestedesavoir
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Il est fortement recommandé (pour des raisons de compatibilité), que tous les programmes à installer soient en 32 bits ou en 64 bits. Il est conseillé de ne pas mélanger les deux.</p>
+</div>
+<div class="section" id="prerequis">
+<h2>Prérequis<a class="headerlink" href="#prerequis" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li>Téléchargez <a class="reference external" href="http://gnuwin32.sourceforge.net/downlinks/zlib.php">zlib</a> (prérequis pour la bibliothèque <code class="docutils literal notranslate"><span class="pre">Pillow</span></code>)</li>
+<li><dl class="first docutils">
+<dt>Téléchargez et installez les outils suivants :</dt>
+<dd><ul class="first last">
+<li><a class="reference external" href="http://www.microsoft.com/fr-fr/download/details.aspx?id=40855">PowerShell 3.0+</a>. Uniquement pour les PC tournant sous Windows 7 ou antérieur (installé par défaut avec Windows depuis).</li>
+<li><a class="reference external" href="http://git-scm.com/download/win">Git</a> (Git pour Eclipse ne suffit pas ; associez les .sh).</li>
+<li><a class="reference external" href="https://www.gnu.org/software/gettext/">gettext</a>.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><a class="reference external" href="https://www.python.org/downloads/release/python-344/">Téléchargez et installez Python 3.4</a>.</li>
+<li>Installez setuptools : Démarrez Powershell en mode administrateur et lancez la commande suivante : <code class="docutils literal notranslate"><span class="pre">(Invoke-WebRequest</span> <span class="pre">https://bootstrap.pypa.io/ez_setup.py).Content</span> <span class="pre">|</span> <span class="pre">python</span> <span class="pre">-</span></code></li>
+<li>Décompressez l’archive <code class="docutils literal notranslate"><span class="pre">setuptools-*XX.X.X*.zip</span></code>.</li>
+<li>Avec la commande <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">setuptools-XX.X.X</span></code>, ouvrez le répertoire possèdant <em>easy_install.py</em>.</li>
+<li>Installez pip&nbsp;: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">easy_install.py</span> <span class="pre">pip</span></code>.</li>
+<li>Vous devriez avoir un nouveau répertoire <code class="docutils literal notranslate"><span class="pre">C:\Python34\Scripts</span></code>, rajoutez le dans le <em>PATH, la variable d’environnement</em>.</li>
+<li>Réinstallez easyinstall : <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">easy_install.py</span> <span class="pre">easyinstall</span></code>, ça vous permettra de l’utiliser partout, (supprimez l’ancien package).</li>
+<li>Redémarrez Powershell (pour recharger <em>la variable d’environnement PATH</em>).</li>
+<li><dl class="first docutils">
+<dt>Installez Virtualenv avec les commandes suivante :</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">virtualenv</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">virtualenvwrapper-powershell</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Clonez le dépot git <em>via la console git</em> (et pas via powershell) windows: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/zestedesavoir/zds-site.git</span></code></li>
+<li><dl class="first docutils">
+<dt>Créez votre workspace dédié à ZdS (mode administrateur obligatoire).</dt>
+<dd><ul class="first last">
+<li>se placer dans le dossier du dépôt cloné (<code class="docutils literal notranslate"><span class="pre">zds-site</span></code>)</li>
+<li>tapez <code class="docutils literal notranslate"><span class="pre">virtualenv</span> <span class="pre">zdsenv</span></code> (il va alors créer l’environnement virtuel <code class="docutils literal notranslate"><span class="pre">zdenv</span></code>)</li>
+<li>Activez l’environnement en exécutant le fichier <code class="docutils literal notranslate"><span class="pre">zdsenv/bin/activate.ps1</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>(?) Si vous avez <code class="docutils literal notranslate"><span class="pre">(zdsenv)</span></code> à gauche de la zone de saisie, c’est que vous êtes dans l’environnement <em>zdsenv</em>.</p>
+<p>Pour redémarrer virtualenv les fois suivantes : exécutez à nouveau le fichier <code class="docutils literal notranslate"><span class="pre">zdsenv/bin/activate.ps1</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(zdsenv)PS C:\dev\zestedesavoir\
+</pre></div>
+</div>
+<p>Lancez par la suite <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">-r</span> <span class="pre">requirements-dev.txt</span></code>.</p>
+<p>Si l’erreur suivante apparaît :</p>
+<div class="admonition error">
+<p class="first admonition-title">Erreur</p>
+<p class="last">Unable to find vcvarsall.bat</p>
+</div>
+<p>Installez le compilateur Visual C++ pour Python disponible <a class="reference external" href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=44266">ici</a>.</p>
+<p>Pour que la modification soit effective, relancer une nouvelle fenêtre powershell.</p>
+<div class="section" id="les-virtualenvs-et-pycharm">
+<h3>Les virtualenvs et pycharm<a class="headerlink" href="#les-virtualenvs-et-pycharm" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Avec PyCharm (Pour avoir une license Pro contactez le directeur technique (DTC)) vous pouvez gérer les virtualenv de manière bien plus performante qu’avec la commande powershell de base.
+Bien que le wrapper doive être installé comme dit au dessus, PyCharm vous offre une interface plus maniable.
+Ouvrez le projet dans PyCharm, puis allez dans Fichier(File)-&gt;Settings
+Dans «&nbsp;Project interpreter&nbsp;» sélectionnez la version «&nbsp;Python 3.4&nbsp;» que vous avez installée. Cliquez alors sur la roue dentée puis «&nbsp;Create virtualenv&nbsp;». Vous pourrez alors sélectionner le dossier dans lequel
+se trouve le virtualenv et son accessibilité par PyCharm. PyCharm vous notifiera alors que vous n’avez pas toutes les dépendances et vous proposera de les installer.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Par défaut PyCharm ne va pas chercher les dépendances dans requirements-dev.txt.
+Vous pouvez installer les dépendances depuis PowerShell ou bien aller dans l’onglet Tools des settings puis dans la partie «&nbsp;Python Integration&nbsp;» pour y changer temporairement le chemin vers le fichier de dépendances.</p>
+</div>
+</div>
+</div>
+<div class="section" id="installation-des-outils-front-end-et-de-zmarkdown">
+<h2>Installation des outils front-end et de zmarkdown<a class="headerlink" href="#installation-des-outils-front-end-et-de-zmarkdown" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il vous faut installer les outils du front-end.
+Pour cela, rendez-vous sur <a class="reference external" href="extra-install-frontend.html">la documentation dédiée</a>.
+Ensuite, <a class="reference external" href="extra-zmd.html">installez zmarkdown</a></p>
+</div>
+<div class="section" id="suite-et-fin-de-l-installation">
+<h2>Suite et fin de l’installation<a class="headerlink" href="#suite-et-fin-de-l-installation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans la console PowerShell via l’environnement zdsenv installez les dépendances:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">easy_install</span> <span class="pre">lxml</span></code> ;</li>
+<li><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">-r</span> <span class="pre">requirements-dev.txt</span></code></li>
+<li>Cairo, disponible <a class="reference external" href="https://www.cairographics.org/download">ici</a> ;</li>
+<li>GTK+ (qui contient les DLL de Cairo) disponible <a class="reference external" href="http://downloads.sourceforge.net/gladewin32/gtk-2.12.9-win32-2.exe">ici</a> ;</li>
+<li><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">.\manage.py</span> <span class="pre">migrate</span></code> ;</li>
+<li><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">.\manage.py</span> <span class="pre">loaddata</span> <span class="pre">(dir</span> <span class="pre">.\fixtures\*.yaml)</span></code>, puis <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">.\manage.py</span> <span class="pre">load_factory_data</span> <span class="pre">.\fixtures\advanced\aide_tuto_media.yaml</span></code>, afin de créer <a class="reference external" href="../utils/fixture_loaders.html">le jeu de données utile au dévellopement</a>.</li>
+</ul>
+<p>On peut finalement lancer ZdS:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">zmd/node_modules/zmarkdown</span> <span class="pre">&amp;&amp;</span> <span class="pre">npm</span> <span class="pre">run</span> <span class="pre">server</span></code> <a class="reference external" href="extra-zmd.html#utilisation">pour zmarkdown</a> ;</li>
+<li><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></code></li>
+</ul>
+</div>
+<div class="section" id="aller-plus-loin">
+<h2>Aller plus loin<a class="headerlink" href="#aller-plus-loin" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour faire fonctionner ZdS dans son ensemble vous devez installer les outils LateX et Elasticsearch:</p>
+<ul class="simple">
+<li><a class="reference external" href="extra-install-es.html">Installez Elasticsearch</a> ;</li>
+<li><a class="reference external" href="extra-install-latex.html">Installez LaTeX</a>.</li>
+</ul>
+<p>Vous pouvez également <a class="reference external" href="../utils/git-pre-hook.html">indiquer à Git de ne pas effectuer de commit s’il y a des erreurs de formatage dans le code</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extra-deploy-in-production.html" class="btn btn-neutral float-right" title="Configuration des serveurs de production" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install-osx.html" class="btn btn-neutral" title="Installation sous macOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014-2019, Zeste de Savoir
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
